@@ -3,7 +3,10 @@ import { buildCat } from './../util.js';
 
 const DEFAULT = 
   { 
-    'stateChange' : 'not yet changed'
+    stateChange : 'not yet changed',
+    plan : {},
+    facts : {},
+    player : {}
   };
 
 const catData = (state = DEFAULT, action) => {
@@ -24,8 +27,16 @@ const catData = (state = DEFAULT, action) => {
   }
 };
 
+const player = (state = DEFAULT, action) => {
+  switch(action.type) {
+    default:
+      return state;
+  }
+};
+
 export default combineReducers(
   {
-    catData
+    catData,
+    player
   }
 );

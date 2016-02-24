@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { DragSource } from 'react-dnd';
 import './cat.scss';
 import './sword.png';
 import './heart.png';

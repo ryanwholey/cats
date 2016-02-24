@@ -3,6 +3,7 @@ import * as actions from './../../redux/actions';
 import { connect } from 'react-redux';
 import CatList from './../catList/catList.jsx';
 import { buildCat } from './../../util.js';
+import Hand from './../hand/hand.jsx';
 
 import './content.scss';
 
@@ -13,11 +14,11 @@ class Content extends Component {
     return (
       <div id="__content__" className="container">
         <div className="row">
-          <div className="col-lg-12">
-            hello
-          </div>
+          <Hand />
         </div>
-        <CatList />
+        <div className="row">
+          <CatList />
+        </div>
       </div>
     );
   }

@@ -13,9 +13,7 @@ class CatList extends Component {
 
     return (
       <div className='__CatList__'>
-       
         {cats}
-        
       </div>
     );
   }
