@@ -26502,17 +26502,11 @@
 	  }
 
 	  _createClass(Content, [{
-	    key: 'handleClick',
-	    value: function handleClick() {
-	      (0, _util.buildCat)(this.props.general.pics, this.props.general.facts);
-	    }
-	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'div',
 	        { id: '__content__', className: 'container' },
-	        _react2.default.createElement('input', { type: 'button', value: 'changeState', onClick: this.handleClick.bind(this) }),
 	        _react2.default.createElement(_catList2.default, null)
 	      );
 	    }
@@ -27068,6 +27062,8 @@
 
 	var _cat2 = _interopRequireDefault(_cat);
 
+	__webpack_require__(388);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -27096,11 +27092,7 @@
 	      return _react2.default.createElement(
 	        'div',
 	        { className: '__CatList__' },
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'board' },
-	          cats
-	        )
+	        cats
 	      );
 	    }
 	  }]);
@@ -27167,13 +27159,22 @@
 	      return _react2.default.createElement(
 	        'div',
 	        { className: '__Cat__' },
-	        _react2.default.createElement('img', { className: 'pic', src: this.props.stats.pic }),
 	        _react2.default.createElement(
 	          'div',
-	          null,
-	          ' ',
-	          this.props.stats.fact,
-	          ' '
+	          { className: 'inner' },
+	          this.props.stats.name,
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'stats' },
+	            _react2.default.createElement('img', { className: 'pic', src: this.props.stats.pic }),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'fact' },
+	              ' ',
+	              this.props.stats.fact,
+	              ' '
+	            )
+	          )
 	        )
 	      );
 	    }
@@ -27221,7 +27222,7 @@
 
 
 	// module
-	exports.push([module.id, ".__Cat__ {\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n  justify-items: space-between;\n  background: darkgrey;\n  border: solid 5px black;\n  border-radius: 10%;\n  width: 15em;\n  height: 20em; }\n  .__Cat__ .pic {\n    width: 100px;\n    height: 100px; }\n", ""]);
+	exports.push([module.id, ".__Cat__ {\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n  justify-items: space-between;\n  background: black;\n  border: solid 5px black;\n  border-radius: 5%;\n  width: 15em;\n  height: 20em;\n  margin: 1em .5em 1em .5em; }\n  .__Cat__ .pic {\n    height: 50%;\n    border: solid 5px;\n    border-bottom: solid 5px lightgrey;\n    border-right: solid 5px lightgrey;\n    border-top: solid 5px darkgrey;\n    border-left: solid 5px darkgrey; }\n  .__Cat__ .inner {\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n    align-items: center;\n    align-content: space-around;\n    background: lightblue;\n    height: 93%;\n    width: 93%;\n    border-bottom: solid 2px lightgrey;\n    border-right: solid 2px lightgrey;\n    border-top: solid 2px darkgrey;\n    border-left: solid 2px darkgrey; }\n  .__Cat__ .stats {\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n    align-items: center;\n    align-content: space-around;\n    background: lightblue;\n    height: 93%;\n    width: 93%; }\n  .__Cat__ .fact {\n    overflow: scroll; }\n", ""]);
 
 	// exports
 
@@ -27237,14 +27238,20 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+	exports.buildCat = undefined;
+
+	var _names = __webpack_require__(390);
+
 	var buildCat = exports.buildCat = function buildCat(pics, items) {
 	  var cats = [];
 	  pics.forEach(function (item, index) {
 	    cats.push({
+	      name: _names.names[calcStat(item.substring(40, 41), _names.names.length - 1, 0)],
 	      pic: item,
 	      fact: items[index],
 	      hp: calcStat(item.substring(40, 42), 20, 5),
 	      at: calcStat(item.substring(37, 39), 7, 3)
+
 	    });
 	  });
 	  return cats;
@@ -27257,6 +27264,61 @@
 	};
 
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/ryanwholey/Work/cats/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "util.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+
+/***/ },
+/* 388 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(389);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(378)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/sass-loader/index.js!./catList.scss", function() {
+				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/sass-loader/index.js!./catList.scss");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 389 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(377)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".__CatList__ {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: wrap;\n  justify-content: space-around; }\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 390 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/ryanwholey/Work/cats/node_modules/react-hot-loader/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/ryanwholey/Work/cats/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var names = exports.names = ['Achglles', 'Adonis', 'Ajax', 'Alvis', 'Apollo', 'Ara', 'Aries', 'Arthur', 'Atlas', 'Auster', 'Bran', 'Cadmus', 'Castor', 'Cian', 'Conall', 'Conor', 'Damon', 'Diarmaid', 'Dylan', 'Eros', 'Evander', 'Feargus', 'Finn', 'Fintan', 'Hector', 'Helios', 'Hermes', 'Icarus', 'Janus', 'Jason', 'Jasper', 'Jove', 'Jupiter', 'Leander', 'Mars', 'Mercury', 'Neptune', 'Neptune', 'Oceanus', 'Odin', 'Odysseus', 'Oisin', 'Orion', 'Oscar', 'Osiris', 'Pan', 'Paris', 'Percival', 'Perseus', 'Poseidon', 'Saturn', 'Silvanus', 'Thor', 'Tristan', 'Vishnu', 'Zephyr', 'Zeus', 'Acantha', 'Althea', 'Andromeda', 'Antheia', 'Aphrodite', 'Ariadne', 'Artemis', 'Astra', 'Atalanta', 'Athena', 'Aurora', 'Brigid', 'Brunhild', 'Calliope', 'Calypso', 'Camilla', 'Cassandra', 'Cerelia', 'Ceres', 'Chandra', 'Clio', 'Cybele', 'Cynthia', 'Daphne', 'Delia', 'Demeter', 'Diana', 'Echo', 'Enid', 'Eos', 'Etain', 'Fauna', 'Flora', 'Fortuna', 'Freya', 'Gaia', 'Grainne', 'Halcyon', 'Hebe', 'Hera', 'Hermione', 'Hero', 'Hestia', 'Ianthe', 'Indira', 'Irene', 'Iris', 'Isis', 'Isolde', 'Jana', 'Jaya', 'Juno', 'Kora', 'Lakshmi', 'Leda', 'Lilith', 'Lorelei', 'Lucina', 'Luna', 'Lyssa', 'Maeve', 'Maia', 'Melea', 'Minerva', 'Morgan', 'Neith', 'Nephele', 'Nessa', 'Niamh', 'Nike', 'Niobe', 'Nyx', 'Padma', 'Pallas', 'Pandora', 'Pax', 'Penelope', 'Persephone', 'Phaedra', 'Phoebe', 'Phyllis', 'Priya', 'Rhea', 'Selene', 'Signy', 'Tanith', 'Tara', 'Thalassa', 'Uma', 'Venus', 'Vesta', 'Xanthe', 'Ziva'];
+
+	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/ryanwholey/Work/cats/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "names.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ }
 /******/ ]);

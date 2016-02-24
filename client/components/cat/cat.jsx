@@ -12,8 +12,13 @@ class Cat extends Component {
     
     return (
       <div className="__Cat__">
-        <img className="pic" src={this.props.stats.pic} />
-        <div> {this.props.stats.fact} </div>
+        <div className="inner">
+          {this.props.stats.name}
+          <div className="stats">
+            <img className="pic" src={this.props.stats.pic} />
+            <div className="fact"> {this.props.stats.fact} </div>
+          </div>
+        </div>
       </div>
     );
   }

@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Cat from './../cat/cat.jsx';
 
+import './catList.scss';
+
 class CatList extends Component {
 
   render () {
@@ -11,9 +13,9 @@ class CatList extends Component {
 
     return (
       <div className='__CatList__'>
-        <div className='board'>
+       
         {cats}
-        </div>
+        
       </div>
     );
   }

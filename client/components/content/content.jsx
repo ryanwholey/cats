@@ -8,14 +8,10 @@ import './content.scss';
 
 class Content extends Component {
 
-  handleClick () {
-    buildCat(this.props.general.pics, this.props.general.facts);
-  }
 
   render () {
     return (
       <div id="__content__" className="container">
-        <input type="button" value="changeState" onClick={this.handleClick.bind(this)} />
         <CatList />
       </div>
     );
