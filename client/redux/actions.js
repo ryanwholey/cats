@@ -6,6 +6,27 @@ export const changeState = (input) => {
   };
 };
 
+export const currentChoice = (choice) => {
+  return {
+    type: 'CURRENT_CHOICE',
+    payload: choice
+  };
+};
+
+export const addToHand = (index) => {
+  return {
+    type: 'ADD_TO_HAND',
+    payload: index
+  };
+};
+
+export const spliceFromAvailable = (index) => {
+  return {
+    type: 'SPLICE_FROM_AVAILABLE',
+    payload: index
+  };
+};
+
 export const getPictures = () => {
   return (dispatch) => {
     return fetch('http://localhost:8000/pics')

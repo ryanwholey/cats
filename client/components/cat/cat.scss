@@ -8,45 +8,51 @@
   border-radius: 5%;
   font-family: Lato;
   box-shadow: 5px 10px 10px #777;
+  border: solid 1px black;
 
   .inner {
     margin: 1em 0 1em 0;
     height: 90%;
     background: #EEE;
     padding: .2em;
-    border:solid black 1px;
+    border: solid black 1px;
   }
-  // margin: 1em .5em 1em .5em;
+  
 
   .img {
     position: relative;
     float: left;
-    width:  100px;
-    height: 100px;
+    width:  7em;
+    height: 7em;
     background-position: 50% 50%;
     background-repeat: no-repeat;
     background-size: cover;
-    border-bottom: solid 2px lightgrey;
-    border-right: solid 2px lightgrey;
-    border-top: solid 2px darkgrey;
-    border-left: solid 2px darkgrey;
+    border-bottom: solid 3px lightblue;
+    border-right: solid 3px lightblue;
+    border-top: solid 3px darkgrey;
+    border-left: solid 3px darkgrey;
   }
   .img_container{
     display:flex;
     justify-content: center;
   }
   .icon {
-    width: 2em;
-    height: 2em;
+    width: 1.9em;
+    height: 1.9em;
   }
   .stats_bar {
     display:flex;
     width:50%;
     justify-content: space-around;
-    margin-left:1em;
+    padding-bottom:.1em;
+
+  }
+  .stats_container {
+    display:flex;
+    justify-content: center;
   }
   .stats_bar > div {
-    font-size: large;
+    font-size: 1.7em;
   }
 
   .fact {

@@ -1,5 +1,8 @@
 .__Hand__ {
-  height: 30vh;
+  height: 22em;
   margin-bottom: 2em;
   box-shadow: 5px 10px 10px darkgrey;
+  display: flex;
+  justify-content: space-around;
+  border: solid 1px #777;
 }

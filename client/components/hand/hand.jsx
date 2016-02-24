@@ -1,19 +1,30 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Cat from './../cat/cat.jsx';
+import {addToHand, spliceFromAvailable} from './../../redux/actions';
+import _ from 'lodash';
 
 import './hand.scss';
 
 class Hand extends Component {
 
-  render () {
+  allowDrop (ev) {
+    ev.preventDefault();
+  }
 
-    const cats = this.props.player && this.props.player.cards  ? 
-      this.props.player.cards.map((cat, i) => <Cat stats={cat} key={i}/>) : null;
+  drop (ev) {
+    this.props.dispatch(addToHand(this.props.catData.currentChoice));
+    this.props.dispatch(spliceFromAvailable(this.props.catData.currentChoice));
+  }
+
+  render () {
+    console.log(this.props.catData.player.cards);
+    const cats = this.props.catData && this.props.catData.player.cards  ? 
+      _.map(this.props.catData.player.cards, (cat, i) => <Cat stats={cat} key={i} />) : null;
 
     return (
-      <div className="__Hand__ col-lg-11">
-        
+      <div className="__Hand__ col-lg-11" onDrop={this.drop.bind(this)} onDragOver={this.allowDrop.bind(this)}>
+        {cats}
       </div>
     );
   }
@@ -22,7 +33,7 @@ class Hand extends Component {
 
 const select = (state) => {
   return {
-    player : state.player
+    catData : state.catData
   };
 };
 

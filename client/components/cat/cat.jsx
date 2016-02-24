@@ -1,9 +1,11 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { DragSource } from 'react-dnd';
+import { currentChoice } from './../../redux/actions';
+import store from './../../redux/store';
 import './cat.scss';
 import './sword.png';
 import './heart.png';
+
 
 class Cat extends Component {
 
@@ -11,9 +13,15 @@ class Cat extends Component {
     super(props);
   }
 
+  drag (ev) {
+    ev.dataTransfer.setData("text", ev.target.id);
+    console.log(ev.target, this.props);
+    store.dispatch(currentChoice(this.props.stats.index));
+  }
+
   render () {
     return (
-      <div className="__Cat__ container">
+      <div className="__Cat__ container" draggable="true" onDragStart={this.drag.bind(this)}>
         <div id="inner" className="row inner">
 
           <div className="row">
@@ -34,13 +42,13 @@ class Cat extends Component {
             </div>
           </div>
 
-         <div className="row">
+         <div className="row stats_container">
             
             <div className="stats_bar">
               <img className="icon" src='./sword.png' />
-              <div>{this.props.stats.at} </div>
+              <div>{this.props.stats.show ? this.props.stats.at : '?'} </div>
               <img className="icon" src='./heart.png' />
-              <div> {this.props.stats.hp} </div>
+              <div> {this.props.stats.show ? this.props.stats.hp : '?'} </div>
             </div>
         </div>
 
@@ -48,7 +56,6 @@ class Cat extends Component {
       </div>
     );
   }
-
 }
 
 export default Cat;
