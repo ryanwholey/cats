@@ -41,7 +41,6 @@ class Cat extends Component {
               <img className="icon" src='./heart.png' />
               <div> {this.props.stats.hp} </div>
             </div>
-            
         </div>
 
         </div>
