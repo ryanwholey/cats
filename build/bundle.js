@@ -26507,6 +26507,15 @@
 	      return _react2.default.createElement(
 	        'div',
 	        { id: '__content__', className: 'container' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'row' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'col-lg-12' },
+	            'hello'
+	          )
+	        ),
 	        _react2.default.createElement(_catList2.default, null)
 	      );
 	    }
@@ -27135,6 +27144,10 @@
 
 	__webpack_require__(385);
 
+	__webpack_require__(391);
+
+	__webpack_require__(392);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -27155,24 +27168,68 @@
 	  _createClass(Cat, [{
 	    key: 'render',
 	    value: function render() {
-
 	      return _react2.default.createElement(
 	        'div',
-	        { className: '__Cat__' },
+	        { className: '__Cat__ container' },
 	        _react2.default.createElement(
 	          'div',
-	          { className: 'inner' },
-	          this.props.stats.name,
+	          { id: 'inner', className: 'row inner' },
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'stats' },
-	            _react2.default.createElement('img', { className: 'pic', src: this.props.stats.pic }),
+	            { className: 'row' },
 	            _react2.default.createElement(
 	              'div',
-	              { className: 'fact' },
-	              ' ',
-	              this.props.stats.fact,
-	              ' '
+	              { className: 'col-lg-11' },
+	              _react2.default.createElement(
+	                'div',
+	                null,
+	                this.props.stats.name
+	              )
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'row' },
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'col-lg-11, img_container' },
+	              _react2.default.createElement('div', { className: 'img', style: { backgroundImage: 'url(' + this.props.stats.pic + ')' } })
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'row' },
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'col-lg-11' },
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'fact' },
+	                this.props.stats.fact
+	              )
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'row' },
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'stats_bar' },
+	              _react2.default.createElement('img', { className: 'icon', src: './sword.png' }),
+	              _react2.default.createElement(
+	                'div',
+	                null,
+	                this.props.stats.at,
+	                ' '
+	              ),
+	              _react2.default.createElement('img', { className: 'icon', src: './heart.png' }),
+	              _react2.default.createElement(
+	                'div',
+	                null,
+	                ' ',
+	                this.props.stats.hp,
+	                ' '
+	              )
 	            )
 	          )
 	        )
@@ -27222,7 +27279,7 @@
 
 
 	// module
-	exports.push([module.id, ".__Cat__ {\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n  justify-items: space-between;\n  background: black;\n  border: solid 5px black;\n  border-radius: 5%;\n  width: 15em;\n  height: 20em;\n  margin: 1em .5em 1em .5em; }\n  .__Cat__ .pic {\n    height: 50%;\n    border: solid 5px;\n    border-bottom: solid 5px lightgrey;\n    border-right: solid 5px lightgrey;\n    border-top: solid 5px darkgrey;\n    border-left: solid 5px darkgrey; }\n  .__Cat__ .inner {\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n    align-items: center;\n    align-content: space-around;\n    background: lightblue;\n    height: 93%;\n    width: 93%;\n    border-bottom: solid 2px lightgrey;\n    border-right: solid 2px lightgrey;\n    border-top: solid 2px darkgrey;\n    border-left: solid 2px darkgrey; }\n  .__Cat__ .stats {\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n    align-items: center;\n    align-content: space-around;\n    background: lightblue;\n    height: 93%;\n    width: 93%; }\n  .__Cat__ .fact {\n    overflow: scroll; }\n", ""]);
+	exports.push([module.id, ".__Cat__ {\n  width: 15em;\n  height: 20em;\n  margin: 1em 0 1em 0;\n  background: #FFF;\n  border-radius: 5%;\n  font-family: Lato;\n  box-shadow: 5px 10px 10px #777; }\n  .__Cat__ .inner {\n    margin: 1em 0 1em 0;\n    height: 90%;\n    background: #EEE;\n    padding: .2em;\n    border: solid black 1px; }\n  .__Cat__ .img {\n    position: relative;\n    float: left;\n    width: 100px;\n    height: 100px;\n    background-position: 50% 50%;\n    background-repeat: no-repeat;\n    background-size: cover;\n    border-bottom: solid 2px lightgrey;\n    border-right: solid 2px lightgrey;\n    border-top: solid 2px darkgrey;\n    border-left: solid 2px darkgrey; }\n  .__Cat__ .img_container {\n    display: flex;\n    justify-content: center; }\n  .__Cat__ .icon {\n    width: 2em;\n    height: 2em; }\n  .__Cat__ .stats_bar {\n    display: flex;\n    width: 50%;\n    justify-content: space-around;\n    margin-left: 1em; }\n  .__Cat__ .stats_bar > div {\n    font-size: large; }\n  .__Cat__ .fact {\n    overflow: scroll;\n    height: 100px; }\n", ""]);
 
 	// exports
 
@@ -27319,6 +27376,18 @@
 	var names = exports.names = ['Achglles', 'Adonis', 'Ajax', 'Alvis', 'Apollo', 'Ara', 'Aries', 'Arthur', 'Atlas', 'Auster', 'Bran', 'Cadmus', 'Castor', 'Cian', 'Conall', 'Conor', 'Damon', 'Diarmaid', 'Dylan', 'Eros', 'Evander', 'Feargus', 'Finn', 'Fintan', 'Hector', 'Helios', 'Hermes', 'Icarus', 'Janus', 'Jason', 'Jasper', 'Jove', 'Jupiter', 'Leander', 'Mars', 'Mercury', 'Neptune', 'Neptune', 'Oceanus', 'Odin', 'Odysseus', 'Oisin', 'Orion', 'Oscar', 'Osiris', 'Pan', 'Paris', 'Percival', 'Perseus', 'Poseidon', 'Saturn', 'Silvanus', 'Thor', 'Tristan', 'Vishnu', 'Zephyr', 'Zeus', 'Acantha', 'Althea', 'Andromeda', 'Antheia', 'Aphrodite', 'Ariadne', 'Artemis', 'Astra', 'Atalanta', 'Athena', 'Aurora', 'Brigid', 'Brunhild', 'Calliope', 'Calypso', 'Camilla', 'Cassandra', 'Cerelia', 'Ceres', 'Chandra', 'Clio', 'Cybele', 'Cynthia', 'Daphne', 'Delia', 'Demeter', 'Diana', 'Echo', 'Enid', 'Eos', 'Etain', 'Fauna', 'Flora', 'Fortuna', 'Freya', 'Gaia', 'Grainne', 'Halcyon', 'Hebe', 'Hera', 'Hermione', 'Hero', 'Hestia', 'Ianthe', 'Indira', 'Irene', 'Iris', 'Isis', 'Isolde', 'Jana', 'Jaya', 'Juno', 'Kora', 'Lakshmi', 'Leda', 'Lilith', 'Lorelei', 'Lucina', 'Luna', 'Lyssa', 'Maeve', 'Maia', 'Melea', 'Minerva', 'Morgan', 'Neith', 'Nephele', 'Nessa', 'Niamh', 'Nike', 'Niobe', 'Nyx', 'Padma', 'Pallas', 'Pandora', 'Pax', 'Penelope', 'Persephone', 'Phaedra', 'Phoebe', 'Phyllis', 'Priya', 'Rhea', 'Selene', 'Signy', 'Tanith', 'Tara', 'Thalassa', 'Uma', 'Venus', 'Vesta', 'Xanthe', 'Ziva'];
 
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/ryanwholey/Work/cats/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "names.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+
+/***/ },
+/* 391 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__.p + "sword.png";
+
+/***/ },
+/* 392 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__.p + "heart.png";
 
 /***/ }
 /******/ ]);

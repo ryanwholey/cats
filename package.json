@@ -21,6 +21,8 @@
     "express": "^4.13.4",
     "morgan": "^1.7.0",
     "react": "^0.14.3",
+    "react-dnd": "^2.1.2",
+    "react-dnd-html5-backend": "^2.1.2",
     "react-dom": "^0.14.3",
     "react-redux": "^4.0.6",
     "redux": "^3.0.5",

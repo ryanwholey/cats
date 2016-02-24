@@ -12,6 +12,11 @@ class Content extends Component {
   render () {
     return (
       <div id="__content__" className="container">
+        <div className="row">
+          <div className="col-lg-12">
+            hello
+          </div>
+        </div>
         <CatList />
       </div>
     );
