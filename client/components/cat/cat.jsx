@@ -9,13 +9,15 @@ class Cat extends Component {
   }
 
   render () {
+    
     return (
       <div className="__Cat__">
-        
+        <img className="pic" src={this.props.stats.pic} />
+        <div> {this.props.stats.fact} </div>
       </div>
     );
   }
-  
+
 }
 
 export default Cat;

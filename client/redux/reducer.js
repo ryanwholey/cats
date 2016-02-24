@@ -1,8 +1,12 @@
 import { combineReducers } from 'redux';
+import { buildCat } from './../util.js';
 
-var DEFAULT = { 'stateChange' : 'not yet changed' };
+const DEFAULT = 
+  { 
+    'stateChange' : 'not yet changed'
+  };
 
-const general = (state = DEFAULT, action) => {
+const catData = (state = DEFAULT, action) => {
   switch(action.type) {
     case 'STATE_CHANGE':
       return { 'stateChange' : action.payload };
@@ -11,13 +15,17 @@ const general = (state = DEFAULT, action) => {
     case 'GET_FACTS':
       return Object.assign({}, state, { facts: action.payload });
     case 'GET_PICTURES_FAILURE':
-      console.log(action.payload);
       return state;
+    case 'BUILD_CATS':
+      const cards = buildCat(state.pics, state.facts);
+      return Object.assign({}, state, { cards });
     default:
       return state;
   }
 };
 
-export default combineReducers({
-  general
-});
+export default combineReducers(
+  {
+    catData
+  }
+);

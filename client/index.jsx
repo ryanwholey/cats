@@ -15,7 +15,7 @@ class App extends Component {
 
   render () {
     return(
-      <div id="composedApp" className="container">
+      <div id="composedApp">
         <Header />
         <Content />
       </div>

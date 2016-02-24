@@ -1,3 +1,9 @@
 #__header__ {
-  background: url("./kittens_jumbo.jpg") center center;
+  background-image: 
+    linear-gradient(
+      rgba(0,0,0,0.1),
+      rgba(0,0,0,0.1)
+    ),
+    url("./kittens_jumbo.jpg");
+  background-position: center center;
 }

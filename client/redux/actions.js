@@ -24,12 +24,14 @@ export const getPictures = () => {
           });
       })
       .then((urls)=>{
-        return dispatch(
-          {
-            type:'GET_PICTURES',
-            payload: urls
-          }
-        );
+        dispatch({
+          type : 'GET_PICTURES',
+          payload : urls
+        });
+        dispatch({
+          type : 'BUILD_CATS'
+        });
+        return;
       })
       .catch((error) => {
         return dispatch(
@@ -52,27 +54,17 @@ export const getFacts = () => {
         return response.json();
       })
       .then((body) => {
-        console.log(body);
-        return body;
-        // let xmlChild = $.parseXML(body).getElementsByTagName('images')[0].childNodes;
-        // return Array.prototype.slice.call(xmlChild)
-        //   .filter((item) => item.nodeType === 1)
-        //   .map((item) => {
-        //     return item.getElementsByTagName('url')[0].innerHTML;
-        //   });
-      })
-      .then((urls)=>{
         return dispatch(
           {
-            type:'GET_PICTURES',
-            payload: urls
+            type:'GET_FACTS',
+            payload: body.facts
           }
         );
       })
       .catch((error) => {
         return dispatch(
           {
-            type:'GET_PICTURES_FAILURE',
+            type:'GET_FACTS_FAILURE',
             payload: error
           }
         );

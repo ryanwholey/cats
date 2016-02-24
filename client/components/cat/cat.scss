@@ -1,3 +1,17 @@
 .__Cat__ {
-  background: lightskyblue;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  justify-items: space-between;
+  background: darkgrey;
+  border: solid 5px black;
+  border-radius: 10%;
+  width: 15em;
+  height: 20em;
+
+  .pic {
+    width: 100px;
+    height: 100px;
+  }
 }

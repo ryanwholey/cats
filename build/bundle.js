@@ -5375,7 +5375,7 @@
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'div',
-	        { id: 'composedApp', className: 'container' },
+	        { id: 'composedApp' },
 	        _react2.default.createElement(_header2.default, null),
 	        _react2.default.createElement(_content2.default, null)
 	      );
@@ -26417,9 +26417,13 @@
 
 	var _redux = __webpack_require__(355);
 
-	var DEFAULT = { 'stateChange': 'not yet changed' };
+	var _util = __webpack_require__(387);
 
-	var general = function general() {
+	var DEFAULT = {
+	  'stateChange': 'not yet changed'
+	};
+
+	var catData = function catData() {
 	  var state = arguments.length <= 0 || arguments[0] === undefined ? DEFAULT : arguments[0];
 	  var action = arguments[1];
 
@@ -26431,15 +26435,17 @@
 	    case 'GET_FACTS':
 	      return Object.assign({}, state, { facts: action.payload });
 	    case 'GET_PICTURES_FAILURE':
-	      console.log(action.payload);
 	      return state;
+	    case 'BUILD_CATS':
+	      var cards = (0, _util.buildCat)(state.pics, state.facts);
+	      return Object.assign({}, state, { cards: cards });
 	    default:
 	      return state;
 	  }
 	};
 
 	exports.default = (0, _redux.combineReducers)({
-	  general: general
+	  catData: catData
 	});
 
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/ryanwholey/Work/cats/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "reducer.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
@@ -26472,6 +26478,8 @@
 
 	var _catList2 = _interopRequireDefault(_catList);
 
+	var _util = __webpack_require__(387);
+
 	__webpack_require__(375);
 
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
@@ -26496,14 +26504,14 @@
 	  _createClass(Content, [{
 	    key: 'handleClick',
 	    value: function handleClick() {
-	      this.props.dispatch(actions.getInitialData());
+	      (0, _util.buildCat)(this.props.general.pics, this.props.general.facts);
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'div',
-	        { id: '__content__' },
+	        { id: '__content__', className: 'container' },
 	        _react2.default.createElement('input', { type: 'button', value: 'changeState', onClick: this.handleClick.bind(this) }),
 	        _react2.default.createElement(_catList2.default, null)
 	      );
@@ -26515,7 +26523,7 @@
 
 	var select = function select(state) {
 	  return {
-	    general: state.general
+	    catData: state.catData
 	  };
 	};
 
@@ -26556,10 +26564,14 @@
 	        return item.getElementsByTagName('url')[0].innerHTML;
 	      });
 	    }).then(function (urls) {
-	      return dispatch({
+	      dispatch({
 	        type: 'GET_PICTURES',
 	        payload: urls
 	      });
+	      dispatch({
+	        type: 'BUILD_CATS'
+	      });
+	      return;
 	    }).catch(function (error) {
 	      return dispatch({
 	        type: 'GET_PICTURES_FAILURE',
@@ -26577,22 +26589,13 @@
 	      }
 	      return response.json();
 	    }).then(function (body) {
-	      console.log(body);
-	      return body;
-	      // let xmlChild = $.parseXML(body).getElementsByTagName('images')[0].childNodes;
-	      // return Array.prototype.slice.call(xmlChild)
-	      //   .filter((item) => item.nodeType === 1)
-	      //   .map((item) => {
-	      //     return item.getElementsByTagName('url')[0].innerHTML;
-	      //   });
-	    }).then(function (urls) {
 	      return dispatch({
-	        type: 'GET_PICTURES',
-	        payload: urls
+	        type: 'GET_FACTS',
+	        payload: body.facts
 	      });
 	    }).catch(function (error) {
 	      return dispatch({
-	        type: 'GET_PICTURES_FAILURE',
+	        type: 'GET_FACTS_FAILURE',
 	        payload: error
 	      });
 	    });
@@ -27030,7 +27033,7 @@
 
 
 	// module
-	exports.push([module.id, "#__header__ {\n  background: url(" + __webpack_require__(382) + ") center center; }\n", ""]);
+	exports.push([module.id, "#__header__ {\n  background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url(" + __webpack_require__(382) + ");\n  background-position: center center; }\n", ""]);
 
 	// exports
 
@@ -27085,10 +27088,19 @@
 	  _createClass(CatList, [{
 	    key: 'render',
 	    value: function render() {
+
+	      var cats = this.props.catData && this.props.catData.cards ? this.props.catData.cards.map(function (cat, i) {
+	        return _react2.default.createElement(_cat2.default, { stats: cat, key: i });
+	      }) : null;
+
 	      return _react2.default.createElement(
 	        'div',
 	        { className: '__CatList__' },
-	        _react2.default.createElement(_cat2.default, null)
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'board' },
+	          cats
+	        )
 	      );
 	    }
 	  }]);
@@ -27098,7 +27110,14 @@
 
 	;
 
-	exports.default = CatList;
+	var select = function select(state) {
+	  console.log(state);
+	  return {
+	    catData: state.catData
+	  };
+	};
+
+	exports.default = (0, _reactRedux.connect)(select)(CatList);
 
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/ryanwholey/Work/cats/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "catList.jsx" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
@@ -27144,7 +27163,19 @@
 	  _createClass(Cat, [{
 	    key: 'render',
 	    value: function render() {
-	      return _react2.default.createElement('div', { className: '__Cat__' });
+
+	      return _react2.default.createElement(
+	        'div',
+	        { className: '__Cat__' },
+	        _react2.default.createElement('img', { className: 'pic', src: this.props.stats.pic }),
+	        _react2.default.createElement(
+	          'div',
+	          null,
+	          ' ',
+	          this.props.stats.fact,
+	          ' '
+	        )
+	      );
 	    }
 	  }]);
 
@@ -27190,10 +27221,42 @@
 
 
 	// module
-	exports.push([module.id, ".__Cat__ {\n  background: lightskyblue; }\n", ""]);
+	exports.push([module.id, ".__Cat__ {\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n  justify-items: space-between;\n  background: darkgrey;\n  border: solid 5px black;\n  border-radius: 10%;\n  width: 15em;\n  height: 20em; }\n  .__Cat__ .pic {\n    width: 100px;\n    height: 100px; }\n", ""]);
 
 	// exports
 
+
+/***/ },
+/* 387 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/ryanwholey/Work/cats/node_modules/react-hot-loader/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/ryanwholey/Work/cats/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var buildCat = exports.buildCat = function buildCat(pics, items) {
+	  var cats = [];
+	  pics.forEach(function (item, index) {
+	    cats.push({
+	      pic: item,
+	      fact: items[index],
+	      hp: calcStat(item.substring(40, 42), 20, 5),
+	      at: calcStat(item.substring(37, 39), 7, 3)
+	    });
+	  });
+	  return cats;
+	};
+
+	var calcStat = function calcStat(str, max, min) {
+	  return +str.split('').map(function (char) {
+	    return char.charCodeAt(0);
+	  }).join('') % (max - min) + min;
+	};
+
+	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/ryanwholey/Work/cats/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "util.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ }
 /******/ ]);
