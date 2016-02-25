@@ -18,13 +18,22 @@ class Hand extends Component {
   }
 
   render () {
-    console.log(this.props.catData.player.cards);
     const cats = this.props.catData && this.props.catData.player.cards  ? 
-      _.map(this.props.catData.player.cards, (cat, i) => <Cat stats={cat} key={i} />) : null;
+      _.map(this.props.catData.player.cards, (cat, i) =>{ 
+        cat.height = 13;
+        cat.width = 10;
+        return <Cat stats={cat} key={i} />
+    }) : null;
 
     return (
-      <div className="__Hand__ col-lg-11" onDrop={this.drop.bind(this)} onDragOver={this.allowDrop.bind(this)}>
-        {cats}
+      <div className="row">
+      <div className='col-sm-1'></div>
+        <div className="__Hand__ col-sm-7" onDrop={this.drop.bind(this)} onDragOver={this.allowDrop.bind(this)}>
+          {cats}
+        </div>
+        <div className="col-sm-3 hand_instructions">
+        moose
+        </div>
       </div>
     );
   }

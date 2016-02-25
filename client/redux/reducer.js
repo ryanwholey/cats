@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { buildCat } from './../util.js';
+import { buildCat, draftEnemies } from './../util.js';
 
 const DEFAULT_CAT_DATA = 
   { 
@@ -7,9 +7,16 @@ const DEFAULT_CAT_DATA =
     facts : {},
     pics: {},
     player:{
-      cards: {
-      }
-    }
+      cards: {},
+      left: 100,
+      charInBattle: 1
+    },
+    enemy:{
+      cards:{},
+      left: 500,
+      charInBattle: 1
+    },
+    battleStatus: 'PRE_BATTLE'
   };
 
 
@@ -37,6 +44,20 @@ const catData = (state = DEFAULT_CAT_DATA, action) => {
       delete state.cards[action.payload]
       // state.cards.splice(action.payload, 1);
       return Object.assign({}, state);
+    case 'START_BATTLE':
+      return Object.assign({}, state, {'battleStatus': 'MID_BATTLE'});
+    case 'DRAFT_ENEMIES':
+      draftEnemies(state);
+      return Object.assign({}, state);
+    case 'MOVE_LEFT':
+      state.player.left -= action.payload;
+      return Object.assign({}, state);
+    case 'MOVE_RIGHT':
+      state.player.left += action.payload;
+      return Object.assign({}, state);
+    case 'CHAR_IN_BATTLE':
+        state[action.payload.user].charInBattle = action.payload.index;
+        return Object.assign({}, state);
     default:
       return state;
   }

@@ -1,7 +1,6 @@
 .__Cat__ {
   
-  width: 15em;
-  height: 20em;
+
   margin: 1em 0 1em 0;
   // background: rgba(20,20,20,0.3);
   background: #FFF;
@@ -12,18 +11,19 @@
 
   .inner {
     margin: 1em 0 1em 0;
-    height: 90%;
+ 
     background: #EEE;
     padding: .2em;
     border: solid black 1px;
+    overflow-y: scroll;
+
   }
   
 
   .img {
     position: relative;
     float: left;
-    width:  7em;
-    height: 7em;
+
     background-position: 50% 50%;
     background-repeat: no-repeat;
     background-size: cover;
@@ -52,7 +52,7 @@
     justify-content: center;
   }
   .stats_bar > div {
-    font-size: 1.7em;
+    // font-size: 1.7em;
   }
 
   .fact {

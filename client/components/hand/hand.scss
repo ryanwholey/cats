@@ -1,8 +1,15 @@
 .__Hand__ {
-  height: 22em;
-  margin-bottom: 2em;
-  box-shadow: 5px 10px 10px darkgrey;
-  display: flex;
-  justify-content: space-around;
-  border: solid 1px #777;
+    height: 15em;
+    margin-bottom: 2em;
+    box-shadow: 5px 10px 10px darkgrey;
+    display: flex;
+    justify-content: space-around;
+    border: solid 1px #777;
+  .hand_container{
+    
+  }
+
+  .hand_instructions {
+    background: red;
+  }
 }

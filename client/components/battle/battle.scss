@@ -1,0 +1,41 @@
+.__Battle__ {
+
+  display:flex;
+  height: 70vh;
+  flex-direction: column;
+
+  .field{
+    flex-grow:1;
+    background: darkgrey;
+    position: relative;
+  }
+  .their_cats{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+  }
+  .my_cats {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+  }
+  .baseline {
+    // position: fixed;
+    display: flex;
+    flex-direction: row;
+    
+  }
+  .filler{
+    flex: 1
+  }
+  .player {
+    box-shadow: none;
+    position: absolute;
+    top: 30px;
+  }
+  .enemy{
+    box-shadow: none;
+    position: absolute;
+    top: 30px;
+  }
+}

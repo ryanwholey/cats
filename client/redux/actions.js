@@ -27,6 +27,45 @@ export const spliceFromAvailable = (index) => {
   };
 };
 
+export const startBattle = () => {
+  return {
+    type: 'START_BATTLE',
+  };
+};
+
+export const draftEnemies = () => {
+  return {
+    type: 'DRAFT_ENEMIES'
+  };
+};
+
+export const moveLeft = (n=10) => {
+  return {
+    type:'MOVE_LEFT',
+    payload: n
+  };
+};
+
+export const moveRight = (n=10) => {
+  return {
+    type:'MOVE_RIGHT',
+    payload: n
+  };
+};
+
+export const attack = () => {
+  return {
+    type: 'ATTACK',
+  };
+};
+
+export const setCharInBattle = (user, index) => {
+  return {
+    type: 'CHAR_IN_BATTLE',
+    payload: {user,index}
+  };
+};
+
 export const getPictures = () => {
   return (dispatch) => {
     return fetch('http://localhost:8000/pics')
