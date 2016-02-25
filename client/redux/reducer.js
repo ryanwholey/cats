@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { buildCat, draftEnemies } from './../util.js';
+import { buildCat, draftEnemies, isCollision } from './../util.js';
 
 const DEFAULT_CAT_DATA = 
   { 
@@ -12,7 +12,7 @@ const DEFAULT_CAT_DATA =
       charInBattle: 1
     },
     enemy:{
-      cards:{},
+      cards: {},
       left: 500,
       charInBattle: 1
     },
@@ -42,7 +42,6 @@ const catData = (state = DEFAULT_CAT_DATA, action) => {
       return Object.assign({}, state);
     case 'SPLICE_FROM_AVAILABLE':
       delete state.cards[action.payload]
-      // state.cards.splice(action.payload, 1);
       return Object.assign({}, state);
     case 'START_BATTLE':
       return Object.assign({}, state, {'battleStatus': 'MID_BATTLE'});
@@ -56,8 +55,28 @@ const catData = (state = DEFAULT_CAT_DATA, action) => {
       state.player.left += action.payload;
       return Object.assign({}, state);
     case 'CHAR_IN_BATTLE':
-        state[action.payload.user].charInBattle = action.payload.index;
-        return Object.assign({}, state);
+      state[action.payload.user].charInBattle = action.payload.index;
+      return Object.assign({}, state);
+    case 'ATTACK':
+      
+      if(isCollision(state)) {
+        if(action.payload.attacker === 'player') {
+          state.enemy.cards[action.payload.defenderCard].hp -= state.player.cards[action.payload.attackerCard].at;
+          if(state.enemy.cards[action.payload.defenderCard].hp < 0){
+            state.enemy.cards[action.payload.defenderCard].hp = 0;
+          }
+          // action.payload.defenderCard.hp -= action.payload.attackerCard.at;
+  
+          // if(action.payload.defenderCard.hp < 0){
+          //   console.log('dead');
+          //   action.payload.defenderCard.hp = 0;
+          // }
+          // state.enemy.cards[state.enemy.charInBattle].hp -= state.player.chards[state.player.charInBattle].at;
+        } else{
+          // state.player.cards[state.player.charInBattle].hp -= state.enemy.chards[state.enemy.charInBattle].at;
+        }
+      }
+      return Object.assign({}, state);
     default:
       return state;
   }

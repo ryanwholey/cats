@@ -24,6 +24,10 @@ const calcStat = (str, max, min) => {
   return (+str.split('').map((char) => char.charCodeAt(0)).join('') % (max - min))  + min;
 };
 
+export const isCollision = (state) => {
+  return state.enemy.left - state.player.left <= 150;
+}
+
 export const draftEnemies = (state) => {
   var indecies = {}
   for(var i = 0; i < 3; i++) {

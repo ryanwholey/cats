@@ -29,7 +29,13 @@ class Hand extends Component {
       <div className="row">
       <div className='col-sm-1'></div>
         <div className="__Hand__ col-sm-7" onDrop={this.drop.bind(this)} onDragOver={this.allowDrop.bind(this)}>
-          {cats}
+          {cats.length===0 ?
+            (
+              <div style={{display:'flex',width:'100%', height:'100%',justifyContent:'center',alignItems:'center'}}>
+                <span style={{fontSize:'2em', color:"darkgrey"}}>Drag cats here</span> 
+              </div>
+            )
+            : cats}
         </div>
         <div className="col-sm-3 hand_instructions">
         moose

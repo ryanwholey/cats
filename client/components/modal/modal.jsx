@@ -6,7 +6,7 @@ import sword from './sword.png';
 import store from './../../redux/store';
 import {startBattle, draftEnemies, setCharInBattle} from './../../redux/actions';
 
-export default class CatList extends Component {
+export default class Modal extends Component {
 
   handleClick () {
     store.dispatch(startBattle());

@@ -46,23 +46,36 @@ export const moveLeft = (n=10) => {
   };
 };
 
-export const moveRight = (n=10) => {
+export const moveRight = (n = 10) => {
   return {
     type:'MOVE_RIGHT',
     payload: n
   };
 };
 
-export const attack = () => {
-  return {
-    type: 'ATTACK',
-  };
-};
+export const attack = (() => {
+  let throttled = false;
+  return (attacker, attackerCard, defenderCard) => {
+    if(!throttled){
+      throttled = true;
+      setTimeout(()=>{
+        throttled = false;
+      }, 320)
+      return {
+        type: 'ATTACK',
+        payload: {attacker, attackerCard, defenderCard}
+      };
+    }else{
+      return {type:null}
+    }
+  }
+})()
+
 
 export const setCharInBattle = (user, index) => {
   return {
     type: 'CHAR_IN_BATTLE',
-    payload: {user,index}
+    payload: {user, index}
   };
 };
 

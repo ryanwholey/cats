@@ -33,9 +33,53 @@
     position: absolute;
     top: 30px;
   }
+  .player_sword {
+    height:50px;
+    width:50px;
+    position: absolute;
+    -webkit-transform-origin: 0% 100%;
+  
+  }
+  .enemy_sword {
+    height:50px;
+    width:50px;
+    position: absolute;
+    transform: scaleX(-1);
+    transition: .3s ease
+  }
   .enemy{
     box-shadow: none;
     position: absolute;
     top: 30px;
+  }
+  .make_big{
+    width:300px;
+  }
+  .player_swing_sword {
+    -webkit-animation: swing_player .5s linear;
+    
+  }
+  .explosion {
+    position: absolute;
+    top: 30px;
+    height: 10em;
+    width: auto;
+  }
+
+  @keyframes swing_player {
+    0%,100% {
+      transform: rotate(0deg);
+    }
+    50%{
+      transform: rotate(70deg);
+    }
+  }
+  @-webkit-keyframes swing_player{
+    0%,100% {
+      transform: rotate(0deg);
+    }
+    50%{
+      transform: rotate(70deg);
+    }
   }
 }
