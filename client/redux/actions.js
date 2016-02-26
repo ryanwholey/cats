@@ -27,9 +27,16 @@ export const spliceFromAvailable = (index) => {
   };
 };
 
-export const startBattle = () => {
+export const changeBattleStatus = (status,winner) => {
   return {
-    type: 'START_BATTLE',
+    type : 'CHANGE_BATTLE_STATUS',
+    payload : {status, winner}
+  };
+};
+
+export const restart = () => {
+  return {
+    type: 'RESTART'
   };
 };
 
@@ -39,17 +46,24 @@ export const draftEnemies = () => {
   };
 };
 
-export const moveLeft = (n=10) => {
+export const decision = (winner) => {
   return {
-    type:'MOVE_LEFT',
-    payload: n
+    type: 'DECISION',
+    payload: winner
   };
 };
 
-export const moveRight = (n = 10) => {
+export const moveLeft = (player, n=10) => {
+  return {
+    type:'MOVE_LEFT',
+    payload: {player,n}
+  };
+};
+
+export const moveRight = (player, n = 10) => {
   return {
     type:'MOVE_RIGHT',
-    payload: n
+    payload: {player,n}
   };
 };
 

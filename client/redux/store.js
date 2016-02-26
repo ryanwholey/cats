@@ -4,8 +4,9 @@ import reducer from './reducer.js';
 
 const store = applyMiddleware(thunk)(createStore)(reducer);
 
-store.subscribe(() => {
-  console.log('current state:', store.getState());
+store.subscribe((e) => {
+  // console.log(e);
+  // console.log('current state:', store.getState());
 });
 
 export default store;

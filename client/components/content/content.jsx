@@ -5,6 +5,7 @@ import CatList from './../catList/catList.jsx';
 import { buildCat } from './../../util.js';
 import Hand from './../hand/hand.jsx';
 import Modal from './../modal/modal.jsx';
+import EndBattleModal from './../modal/endBattleModal.jsx';
 import Battle from './../battle/battle.jsx';
 
 import './content.scss';
@@ -26,17 +27,23 @@ class Content extends Component {
   }
 
   battle () {
-
+    return (
+      <div>
+        { this.props.catData.battleStatus === 'POST_BATTLE' ? <EndBattleModal winner={this.props.catData.winner}/> : null }
+        <Battle />
+      </div>
+    );
   }
 
   render () {
+    
     switch(this.props.catData.battleStatus){
       case 'PRE_BATTLE':
         return this.draftTeam.call(this);
       case 'MID_BATTLE':
-        return <Battle />
       case 'POST_BATTLE':
-        return <div>POST BATTLE</div>
+        return this.battle.call(this);
+        
     }
     return this.props.catData.battleStatus === 'PRE_BATTLE' ? this.draftTeam.call(this) : <div>BATTLE </div>
   }

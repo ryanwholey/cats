@@ -25,7 +25,8 @@ const calcStat = (str, max, min) => {
 };
 
 export const isCollision = (state) => {
-  return state.enemy.left - state.player.left <= 150;
+  console.log(state.enemy.left, state.player.left, state.enemy.left-state.player.left)
+  return state.enemy.left - state.player.left <= 190 && state.enemy.left -state.player.left >= 80;
 }
 
 export const draftEnemies = (state) => {

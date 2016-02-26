@@ -1,21 +1,23 @@
 import React, { Component } from 'react';
 
 import './modal.scss';
-import './../../../node_modules/bootstrap/dist/js/bootstrap.min.js';
+
 import sword from './sword.png';
 import store from './../../redux/store';
-import {startBattle, draftEnemies, setCharInBattle} from './../../redux/actions';
+// import {startBattle, draftEnemies, setCharInBattle} from './../../redux/actions';
+import * as actions from './../../redux/actions';
 
 export default class Modal extends Component {
 
   handleClick () {
-    store.dispatch(startBattle());
+    store.dispatch(actions.changeBattleStatus('MID_BATTLE'));
+    // store.dispatch(startBattle());
   }
 
   componentDidMount (){
-    store.dispatch(draftEnemies());
-    store.dispatch(setCharInBattle('player', 0));
-    store.dispatch(setCharInBattle('enemy', 0));
+    store.dispatch(actions.draftEnemies());
+    store.dispatch(actions.setCharInBattle('player', 0));
+    store.dispatch(actions.setCharInBattle('enemy', 0));
   }
 
   render () {

@@ -4,24 +4,56 @@ import Cat from './../cat/cat.jsx';
 import _ from 'lodash';
 import * as actions from './../../redux/actions';
 import './sword.png';
-import './explosion.png'
+import './blue.png';
+import './red.png';
+import './explosion.png';
 import './battle.scss';
+import './background.jpg';
 
 class Battle extends Component {
   constructor () {
     super();
     this.playerSword = null;
+    this.enemySword = null
     this.myCats = null;
     this.theirCats = null;
+    this.enemyInerval = null;
     this.state = {
-      playerLeft : 100,
       enemy: true,
       player: true
     }
   }
 
+  startEnemy () {
+    const myCats = _.values(this.props.catData.player.cards);
+    const theirCats = _.values(this.props.catData.enemy.cards);
+    let direction = 'LEFT';
+    var count = 0;
+    this.enemyInterval = setInterval(() => {
+      direction === 'LEFT' ? 
+        this.props.dispatch(actions.moveLeft('enemy')) : 
+        this.props.dispatch(actions.moveRight('enemy'));
+      count += 1;
+      if(count % 5 === 0) {
+        direction = Math.random() > .5 ? 'RIGHT' : 'LEFT';
+      }
+      if(count % 2 === 0 && Math.random() > .5) {
+        this.swingWeapon(this.enemySword, 'enemy');
+        this.props.dispatch(actions.attack('enemy',
+          theirCats[this.props.catData.enemy.charInBattle].index,
+          myCats[this.props.catData.player.charInBattle].index));
+      }
+    }, 200);
+  }
+
+  stopEnemy () {
+    clearInterval(this.enemyInterval);
+  }
+
   componentDidMount () {
+    this.startEnemy();
     this.playerSword = $('.player_sword');
+    this.enemySword = $('.enemy_sword');
     const keys = [];
 
     const myCats = _.values(this.props.catData.player.cards);
@@ -34,44 +66,52 @@ class Battle extends Component {
       }
       keys[e.keyCode] = e.type === 'keydown';
       if(keys[37 && keys[39] && keys[32]]) {
-        this.props.dispatch(actions.moveLeft());
+        this.props.dispatch(actions.moveLeft('player'));
         this.setState({playerLeft:this.state.playerLeft-=10})
-        this.props.dispatch(actions.moveRight());
+        this.props.dispatch(actions.moveRight('player'));
         this.setState({playerLeft:this.state.playerLeft+=10})
-        this.props.dispatch(actions.attack('player', myCats[this.props.catData.player.charInBattle].index, theirCats[this.props.catData.enemy.charInBattle].index));
-        this.swingWeapon(this.playerSword);
+        this.props.dispatch(actions.attack('player', 
+          myCats[this.props.catData.player.charInBattle].index, 
+          theirCats[this.props.catData.enemy.charInBattle].index));
+        this.swingWeapon(this.playerSword,'player');
         return;
      
       } else if(keys[37] && keys[39]) {
-        this.props.dispatch(actions.moveLeft());
+        this.props.dispatch(actions.moveLeft('player'));
         this.setState({playerLeft:this.state.playerLeft-=10})
-        this.props.dispatch(actions.moveRight());
+        this.props.dispatch(actions.moveRight('player'));
         this.setState({playerLeft:this.state.playerLeft+=10})
         return;
       } else if(keys[37] && keys[32]) {
-        this.props.dispatch(actions.moveLeft());
+        this.props.dispatch(actions.moveLeft('player'));
         this.setState({playerLeft:this.state.playerLeft-=10})
-        this.props.dispatch(actions.attack('player', myCats[this.props.catData.player.charInBattle].index, theirCats[this.props.catData.enemy.charInBattle].index));
-        this.swingWeapon(this.playerSword);
+        this.props.dispatch(actions.attack('player', 
+          myCats[this.props.catData.player.charInBattle].index, 
+          theirCats[this.props.catData.enemy.charInBattle].index));
+        this.swingWeapon(this.playerSword,'player');
         return;
       } else if(keys[39] && keys[32]) {
-        this.props.dispatch(actions.moveRight());
+        this.props.dispatch(actions.moveRight('player'));
         this.setState({playerLeft:this.state.playerLeft+=10})
-        this.props.dispatch(actions.attack('player', myCats[this.props.catData.player.charInBattle].index, theirCats[this.props.catData.enemy.charInBattle].index));
-        this.swingWeapon(this.playerSword);
+        this.props.dispatch(actions.attack('player', 
+          myCats[this.props.catData.player.charInBattle].index, 
+          theirCats[this.props.catData.enemy.charInBattle].index));
+        this.swingWeapon(this.playerSword,'player');
         return;
       } 
        else if(keys[37]) {
-        this.props.dispatch(actions.moveLeft());
+        this.props.dispatch(actions.moveLeft('player'));
         this.setState({playerLeft:this.state.playerLeft-=10})
         return;
       } else if(keys[39]) {
-        this.props.dispatch(actions.moveRight());
+        this.props.dispatch(actions.moveRight('player'));
         this.setState({playerLeft:this.state.playerLeft+=10})
         return;
       } else if(keys[32]) {
-        this.props.dispatch(actions.attack('player', myCats[this.props.catData.player.charInBattle].index, theirCats[this.props.catData.enemy.charInBattle].index));
-        this.swingWeapon(this.playerSword);
+        this.props.dispatch(actions.attack('player', 
+          myCats[this.props.catData.player.charInBattle].index, 
+          theirCats[this.props.catData.enemy.charInBattle].index));
+          this.swingWeapon(this.playerSword, 'player');
         return;
       }
     }
@@ -79,44 +119,50 @@ class Battle extends Component {
 
   componentDidUpdate () {
     ['player','enemy'].forEach((team) => {
-      // if(this.props.catData[team].charInBattle === 2 && _.values(this.props.catData[team].cards)[this.props.catData[team].charInBattle])
-      console.log(`${team}cards`,this.props.catData[team].cards);
-      console.log('inbattle',this.props.catData[team].charInBattle);
 
-      try {
-          console.log(_.values(this.props.catData[team].cards)[this.props.catData[team].charInBattle].hp);
-      }
-      catch(err) {
-          console.log('caught');
-      }
-      if(_.values(this.props.catData[team].cards)[this.props.catData[team].charInBattle] && _.values(this.props.catData[team].cards)[this.props.catData[team].charInBattle].hp <= 0) {
+      if(this.props.catData.battleStatus === 'MID_BATTLE' && _.values(this.props.catData[team].cards)[this.props.catData[team].charInBattle] && _.values(this.props.catData[team].cards)[this.props.catData[team].charInBattle].hp <= 0) {
+        if(this.state[team]) {
+          team === 'player' ? this.playerSword.toggleClass('hide_element') : this.enemySword.toggleClass('hide_element');
+          let obj = {}
+          obj[team] = false;
+          this.setState(obj);
+          setTimeout(() => {
+            if(this.props.catData.battleStatus !== 'POST_BATTLE'){
+              obj[team] = true;
+              team === 'player' ? this.playerSword.toggleClass('hide_element') : this.enemySword.toggleClass('hide_element');
+              this.setState(obj);
+            }
+          },1000);
+        }
         if(this.props.catData[team].charInBattle === 2) {
-          alert('END OF GAME')
+          this.stopEnemy();
+          let winner = team === 'player' ? 'enemy' : 'player';
+          this.props.dispatch(actions.changeBattleStatus('POST_BATTLE',winner));
+          // this.props.dispatch(actions.decision(team));
+          // team === 'player' ? this.props.dispatch(actions.decision('enemy')) : this.props.dispatch(actions.decision('player'))
         }else{
           this.props.dispatch(actions.setCharInBattle(team, this.props.catData[team].charInBattle + 1) )
-          if(this.state[team]){
-            let obj = {}
-            obj[team] = false;
-            this.setState(obj);
-            setTimeout(()=>{
-              obj[team] = true;
-              this.setState(obj);
-            },1000)
-          }
         }
       }
     })
   }
 
-  swingWeapon ($el) {
-    $el.playKeyframe(
+  swingWeapon ($el, player) {
+    if(player === 'player') {
+      $el.playKeyframe(
         'swing_player .3s linear',
         () => $el.resetKeyframe()
-    );
+      )
+    } else {
+      $el.playKeyframe(
+        'swing_enemy .3s linear',
+        () => $el.resetKeyframe()
+      )
+    }
   }
 
   render () {
-    console.log(this.state.enemy);
+    
     const catHeight = 9;
     const catWidth = 8;
 
@@ -139,18 +185,20 @@ class Battle extends Component {
    
     return (
       <div className='__Battle__' >
+      {/*<input type="button" value="clearInterval" onClick={this.stopEnemy.bind(this)} />*/}
         <div className="well field">
-          <div className="player" style={{left: this.state.playerLeft + 'px'}}>{myCats[this.props.catData.player.charInBattle]}</div>
-          <img id="player_sword" className="player_sword" style={{left: this.props.catData.player.left + 85 + 'px'}} src="./sword.png" />
+          {
+            this.state.player ? 
+              <div className="player" style={{left: this.props.catData.player.left + 'px'}}>{myCats[this.props.catData.player.charInBattle]}</div> :
+              <img className="explosion animated zoomIn" style={{left:this.props.catData.player.left - 50 + 'px'}} src='./explosion.png' />
+          }
           {
              this.state.enemy  ? 
-            (
-              <div>
-                <div className="enemy" style={{left: this.props.catData.enemy.left + 'px'}}>{theirCats[this.props.catData.enemy.charInBattle]}</div>
-                <img className="enemy_sword" src='./sword.png' style={{left: this.props.catData.enemy.left - 30 + 'px'}}/>
-              </div>
-            ) : <img className="explosion animated zoomIn" style={{left:this.props.catData.enemy.left}}src='./explosion.png' />
+              <div className="enemy" style={{left: this.props.catData.enemy.left + 'px'}}>{theirCats[this.props.catData.enemy.charInBattle]}</div> :
+              <img className="explosion animated zoomIn" style={{left:this.props.catData.enemy.left- 50 + 'px'}} src='./explosion.png' />
           }
+          <img className="player_sword" src="./blue.png" style={{left: this.props.catData.player.left + 85 + 'px'}} />
+          <img className="enemy_sword" src='./red.png' style={{left: this.props.catData.enemy.left + 20 + 'px'}}/>
         </div>
         <div className='baseline'>
           <div className="my_cats">

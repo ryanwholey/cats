@@ -23,8 +23,7 @@ describe('receive data', () => {
     request('http://localhost:8000/facts')
       .then((response) => {
         expect(JSON.parse(response).facts.length).to.be.truthy
-        // console.log(response.facts)
-        // expect(response.facts.length).to.be.truthy
+        expect(response.facts.length).to.be.truthy
         done();
       })
       .catch((err) => {
