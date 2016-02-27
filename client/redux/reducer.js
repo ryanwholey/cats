@@ -3,7 +3,6 @@ import { buildCat, draftEnemies, isCollision } from './../util.js';
 
 const DEFAULT_CAT_DATA = 
   { 
-    stateChange : 'not yet changed',
     facts : {},
     pics: {},
     player:{
@@ -25,8 +24,6 @@ const DEFAULT_CAT_DATA =
 const catData = (state = DEFAULT_CAT_DATA, action) => {
   
   switch(action.type) {
-    case 'STATE_CHANGE':
-      return { 'stateChange' : action.payload };
     case 'GET_PICTURES':
       return Object.assign({}, state, { pics: action.payload });
     case 'GET_FACTS':
@@ -36,24 +33,20 @@ const catData = (state = DEFAULT_CAT_DATA, action) => {
     case 'BUILD_CATS':
       const cards = buildCat(state.pics, state.facts);
       return Object.assign({}, state, { cards });
-    case 'CURRENT_CHOICE':
-      return Object.assign({}, state, { currentChoice: action.payload });
     case 'ADD_TO_HAND':
       state.player.cards[action.payload] = state.cards[action.payload];
       return Object.assign({}, state);
     case 'SPLICE_FROM_AVAILABLE':
       delete state.cards[action.payload];
       return Object.assign({}, state);
-    case 'START_BATTLE':
-      return Object.assign({}, state, { 'battleStatus': 'MID_BATTLE' });
     case 'CHANGE_BATTLE_STATUS':
       let winner = action.payload.winner || '';
       return Object.assign({}, state, { 'battleStatus' : action.payload.status, winner : winner });
+    case 'CURRENT_CHOICE':
+      return Object.assign({}, state, { currentChoice: action.payload });
     case 'DRAFT_ENEMIES':
       draftEnemies(state);
       return Object.assign({}, state);
-    case 'DECISION':
-      return Object.assign({}, { winner: action.payload });
     case 'MOVE_LEFT':
       let current = state[action.payload.player].left;
       if(current === 0) {
@@ -85,7 +78,6 @@ const catData = (state = DEFAULT_CAT_DATA, action) => {
       };
       return Object.assign({}, DEFAULT_CAT_DATA);
     case 'ATTACK':
-      
       if(isCollision(state)) {
         if(action.payload.attacker === 'player') {
           state.enemy.cards[action.payload.defenderCard].hp -= state.player.cards[action.payload.attackerCard].at;
@@ -104,7 +96,6 @@ const catData = (state = DEFAULT_CAT_DATA, action) => {
       return state;
   }
 };
-
 
 export default combineReducers(
   {

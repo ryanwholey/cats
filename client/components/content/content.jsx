@@ -15,7 +15,7 @@ class Content extends Component {
   draftTeam () {
     return (
       <div id="__content__" className="container">
-        {Object.keys(this.props.catData.player.cards).length >= 3 ? <Modal /> : null}
+        { Object.keys(this.props.catData.player.cards).length >= 3 ? <Modal /> : null }
           <div className="row">
             <Hand />
           </div>

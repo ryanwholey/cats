@@ -23,12 +23,15 @@ class Cat extends Component {
     return (
       <div className="__Cat__ container" 
           draggable="true" 
-          style={{ width:this.props.stats.width+'em' ,height:this.props.stats.height + 'em', background: this.props.stats.hp === 0 ? 'lightcoral' : 'white' }} 
+          style={{ 
+            width:this.props.stats.width+'em',
+            height:this.props.stats.height + 'em', 
+            background: this.props.stats.hp === 0 ? 'lightcoral' : 'white' }} 
           onDragStart={this.drag.bind(this)}>
         <div id="inner" className="row inner" style={{ height: this.props.stats.thumb ? '80%' : '90%' }}>
           <div className="row">
             <div className="col-lg-11">
-              <div>{this.props.stats.name}</div>
+              <div>{ this.props.stats.name }</div>
             </div>
           </div>
 
@@ -47,21 +50,18 @@ class Cat extends Component {
             (
               <div className="row">
                 <div className="col-lg-11">
-                  <div className="fact">{this.props.stats.fact}</div>
+                  <div className="fact">{ this.props.stats.fact }</div>
                 </div>
               </div>
             ):null }
-          
            <div className="row stats_container">
-              
-              <div className="stats_bar">
-                <img className="icon" src='./sword.png' />
-                <div>{this.props.stats.show ? this.props.stats.at : '?'} </div>
-                <img className="icon" src='./heart.png' />
-                <div> {this.props.stats.show ? this.props.stats.hp : '?'} </div>
-              </div>
+            <div className="stats_bar">
+              <img className="icon" src='./sword.png' />
+              <div>{ this.props.stats.show ? this.props.stats.at : '?' } </div>
+              <img className="icon" src='./heart.png' />
+              <div> { this.props.stats.show ? this.props.stats.hp : '?' } </div>
+            </div>
           </div>
-
         </div>
       </div>
     );

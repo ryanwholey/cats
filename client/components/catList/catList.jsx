@@ -19,9 +19,9 @@ class CatList extends Component {
         cat.height = 20;
         cat.width = 15;
         return(
-          <div key={i} className="cat_container">
-            <img onClick={this.removeCat.bind(this,i)} className="x" src="./x.png"/>
-            <Cat stats={cat} key={i}/>
+          <div key={ i } className="cat_container">
+            <img onClick={ this.removeCat.bind(this,i) } className="x" src="./x.png"/>
+            <Cat stats={ cat } key={ i }/>
           </div>
          );
       }) : null;

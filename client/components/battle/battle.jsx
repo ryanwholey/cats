@@ -177,12 +177,12 @@ class Battle extends Component {
 
     const myCats = _.map(this.props.catData.player.cards, (cat, i) => {
       initCat(cat);
-      return <Cat stats={cat} key={ cat.index }/>;
+      return <Cat stats={ cat } key={ cat.index }/>;
     });
       
     const theirCats = _.map(this.props.catData.enemy.cards, (cat, i) => {
       initCat(cat);
-      return <Cat stats={cat} key={ cat.index }/>;
+      return <Cat stats={ cat } key={ cat.index }/>;
     });
     //uncomment input button field to clear enemy movement interval
     return (

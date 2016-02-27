@@ -2,103 +2,6 @@ var host = process.env.host || 'localhost';
 var port = process.env.port || 8000;
 
 
-console.log(host, port);
-
-
-export const changeState = (input) => {
-  return {
-    type: 'STATE_CHANGE',
-    payload: input
-  };
-};
-
-export const currentChoice = (choice) => {
-  return {
-    type: 'CURRENT_CHOICE',
-    payload: choice
-  };
-};
-
-export const addToHand = (index) => {
-  return {
-    type: 'ADD_TO_HAND',
-    payload: index
-  };
-};
-
-export const spliceFromAvailable = (index) => {
-  return {
-    type: 'SPLICE_FROM_AVAILABLE',
-    payload: index
-  };
-};
-
-export const changeBattleStatus = (status,winner) => {
-  return {
-    type : 'CHANGE_BATTLE_STATUS',
-    payload : { status, winner }
-  };
-};
-
-export const restart = () => {
-  return {
-    type: 'RESTART'
-  };
-};
-
-export const draftEnemies = () => {
-  return {
-    type: 'DRAFT_ENEMIES'
-  };
-};
-
-export const decision = (winner) => {
-  return {
-    type: 'DECISION',
-    payload: winner
-  };
-};
-
-export const moveLeft = (player, n=10) => {
-  return {
-    type:'MOVE_LEFT',
-    payload: { player,n }
-  };
-};
-
-export const moveRight = (player, n = 10) => {
-  return {
-    type:'MOVE_RIGHT',
-    payload: { player,n }
-  };
-};
-
-export const attack = (() => {
-  let throttled = false;
-  return (attacker, attackerCard, defenderCard) => {
-    if(!throttled) {
-      throttled = true;
-      setTimeout(()=> {
-        throttled = false;
-      }, 320);
-      return {
-        type: 'ATTACK',
-        payload: { attacker, attackerCard, defenderCard }
-      };
-    } else {
-      return { type : null };
-    }
-  };
-})();
-
-
-export const setCharInBattle = (user, index) => {
-  return {
-    type: 'CHAR_IN_BATTLE',
-    payload: { user, index }
-  };
-};
-
 export const getPictures = () => {
   return (dispatch) => {
     return fetch(`http://${host}:8000/pics`)
@@ -164,3 +67,84 @@ export const getFacts = () => {
       });
   };
 };
+
+export const addToHand = (index) => {
+  return {
+    type: 'ADD_TO_HAND',
+    payload: index
+  };
+};
+
+export const spliceFromAvailable = (index) => {
+  return {
+    type: 'SPLICE_FROM_AVAILABLE',
+    payload: index
+  };
+};
+
+export const changeBattleStatus = (status,winner) => {
+  return {
+    type : 'CHANGE_BATTLE_STATUS',
+    payload : { status, winner }
+  };
+};
+
+export const currentChoice = (choice) => {
+  return {
+    type: 'CURRENT_CHOICE',
+    payload: choice
+  };
+};
+
+export const draftEnemies = () => {
+  return {
+    type: 'DRAFT_ENEMIES'
+  };
+};
+
+export const moveLeft = (player, n=10) => {
+  return {
+    type:'MOVE_LEFT',
+    payload: { player,n }
+  };
+};
+
+export const moveRight = (player, n = 10) => {
+  return {
+    type:'MOVE_RIGHT',
+    payload: { player,n }
+  };
+};
+
+export const attack = (() => {
+  let throttled = false;
+  return (attacker, attackerCard, defenderCard) => {
+    if(!throttled) {
+      throttled = true;
+      setTimeout(() => {
+        throttled = false;
+      }, 320);
+      return {
+        type: 'ATTACK',
+        payload: { attacker, attackerCard, defenderCard }
+      };
+    } else {
+      return { type : null };
+    }
+  };
+})();
+
+
+export const setCharInBattle = (user, index) => {
+  return {
+    type: 'CHAR_IN_BATTLE',
+    payload: { user, index }
+  };
+};
+
+export const restart = () => {
+  return {
+    type: 'RESTART'
+  };
+};
+

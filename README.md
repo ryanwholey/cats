@@ -19,7 +19,7 @@ All 25+ things you'll ever need to know about cats!
 - `npm run deploy`
 - `docker build -t <your image name here> .`
 - `docker run -p 8000:8000 -it <your image name here>` 
-- application to be served from http://<docker-machine ip>:8000
+- application to be served from http:// `docker-machine ip`  :8000
 
 Make sure if you are going back to development after production that you run webpack again! The production build process changes the host address in the bundle.js.
 
