@@ -42,7 +42,7 @@ const catData = (state = DEFAULT_CAT_DATA, action) => {
       state.player.cards[action.payload] = state.cards[action.payload];
       return Object.assign({}, state);
     case 'SPLICE_FROM_AVAILABLE':
-      delete state.cards[action.payload]
+      delete state.cards[action.payload];
       return Object.assign({}, state);
     case 'START_BATTLE':
       return Object.assign({}, state, { 'battleStatus': 'MID_BATTLE' });
@@ -53,10 +53,10 @@ const catData = (state = DEFAULT_CAT_DATA, action) => {
       draftEnemies(state);
       return Object.assign({}, state);
     case 'DECISION':
-      return Object.assign({}, { winner: action.payload })
+      return Object.assign({}, { winner: action.payload });
     case 'MOVE_LEFT':
       let current = state[action.payload.player].left;
-      if(current === 0){
+      if(current === 0) {
         return state;
       }
       state[action.payload.player].left -= action.payload.n;
@@ -64,7 +64,7 @@ const catData = (state = DEFAULT_CAT_DATA, action) => {
     case 'MOVE_RIGHT':
     let rightCurrent = state[action.payload.player].left;
     
-      if(rightCurrent > window.innerWidth-140){
+      if(rightCurrent > window.innerWidth-140) {
         return state;
       }
       state[action.payload.player].left += action.payload.n;
@@ -77,12 +77,12 @@ const catData = (state = DEFAULT_CAT_DATA, action) => {
         cards: {},
         left: 100,
         charInBattle: 1
-      }
+      };
       DEFAULT_CAT_DATA.enemy = {
         cards: {},
         left: window.innerWidth-200,
         charInBattle: 1
-      }
+      };
       return Object.assign({}, DEFAULT_CAT_DATA);
     case 'ATTACK':
       
@@ -92,7 +92,7 @@ const catData = (state = DEFAULT_CAT_DATA, action) => {
           if(state.enemy.cards[action.payload.defenderCard].hp < 0) {
             state.enemy.cards[action.payload.defenderCard].hp = 0;
           }
-        }else{
+        } else {
           state.player.cards[action.payload.defenderCard].hp -= state.enemy.cards[action.payload.attackerCard].at;
           if(state.player.cards[action.payload.defenderCard].hp < 0) {
             state.player.cards[action.payload.defenderCard].hp = 0;

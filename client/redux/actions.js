@@ -30,7 +30,7 @@ export const spliceFromAvailable = (index) => {
 export const changeBattleStatus = (status,winner) => {
   return {
     type : 'CHANGE_BATTLE_STATUS',
-    payload : {status, winner}
+    payload : { status, winner }
   };
 };
 
@@ -56,40 +56,40 @@ export const decision = (winner) => {
 export const moveLeft = (player, n=10) => {
   return {
     type:'MOVE_LEFT',
-    payload: {player,n}
+    payload: { player,n }
   };
 };
 
 export const moveRight = (player, n = 10) => {
   return {
     type:'MOVE_RIGHT',
-    payload: {player,n}
+    payload: { player,n }
   };
 };
 
 export const attack = (() => {
   let throttled = false;
   return (attacker, attackerCard, defenderCard) => {
-    if(!throttled){
+    if(!throttled) {
       throttled = true;
-      setTimeout(()=>{
+      setTimeout(()=> {
         throttled = false;
-      }, 320)
+      }, 320);
       return {
         type: 'ATTACK',
-        payload: {attacker, attackerCard, defenderCard}
+        payload: { attacker, attackerCard, defenderCard }
       };
-    }else{
-      return {type:null}
+    } else {
+      return { type : null };
     }
-  }
-})()
+  };
+})();
 
 
 export const setCharInBattle = (user, index) => {
   return {
     type: 'CHAR_IN_BATTLE',
-    payload: {user, index}
+    payload: { user, index }
   };
 };
 

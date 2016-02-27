@@ -37,7 +37,7 @@ class Content extends Component {
 
   render () {
     
-    switch(this.props.catData.battleStatus){
+    switch(this.props.catData.battleStatus) {
       case 'PRE_BATTLE':
         return this.draftTeam.call(this);
       case 'MID_BATTLE':
@@ -45,7 +45,7 @@ class Content extends Component {
         return this.battle.call(this);
         
     }
-    return this.props.catData.battleStatus === 'PRE_BATTLE' ? this.draftTeam.call(this) : <div>BATTLE </div>
+    return this.props.catData.battleStatus === 'PRE_BATTLE' ? this.draftTeam.call(this) : <div>BATTLE </div>;
   }
 
 }

@@ -14,7 +14,7 @@ export default class Modal extends Component {
     // store.dispatch(startBattle());
   }
 
-  componentDidMount (){
+  componentDidMount () {
     store.dispatch(actions.draftEnemies());
     store.dispatch(actions.setCharInBattle('player', 0));
     store.dispatch(actions.setCharInBattle('enemy', 0));

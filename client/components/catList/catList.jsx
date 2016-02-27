@@ -12,7 +12,7 @@ class CatList extends Component {
       _.map(this.props.catData.cards, (cat, i) => {
         cat.height = 20;
         cat.width = 15;
-        return <Cat stats={cat} key={i}/>
+        return <Cat stats={cat} key={i}/>;
       }) : null;
 
     return (

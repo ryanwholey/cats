@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Cat from './../cat/cat.jsx';
-import {addToHand, spliceFromAvailable} from './../../redux/actions';
+import { addToHand, spliceFromAvailable } from './../../redux/actions';
 import _ from 'lodash';
 
 import './hand.scss';
@@ -22,17 +22,17 @@ class Hand extends Component {
       _.map(this.props.catData.player.cards, (cat, i) =>{ 
         cat.height = 13;
         cat.width = 10;
-        return <Cat stats={cat} key={i} />
+        return <Cat stats={cat} key={i} />;
     }) : null;
 
     return (
       <div className="row">
       <div className='col-sm-2'></div>
-        <div className="__Hand__ col-sm-8" onDrop={this.drop.bind(this)} onDragOver={this.allowDrop.bind(this)}>
+        <div className="__Hand__ col-sm-8" onDrop={ this.drop.bind(this) } onDragOver={ this.allowDrop.bind(this) }>
           {cats.length === 0 ?
             (
-              <div style={{display:'flex',width:'100%', height:'100%', justifyContent:'center',alignItems:'center'}}>
-                <span style={{fontSize:'2em', color:"darkgrey"}}>Drag cats here</span> 
+              <div style={{ display:'flex',width:'100%', height:'100%', justifyContent:'center',alignItems:'center' }}>
+                <span style={{ fontSize:'2em', color:'darkgrey' }}>Drag cats here</span> 
               </div>
             )
             : cats}

@@ -14,7 +14,7 @@ class Cat extends Component {
   }
 
   drag (ev) {
-    ev.dataTransfer.setData("text", ev.target.id);
+    ev.dataTransfer.setData('text', ev.target.id);
     store.dispatch(currentChoice(this.props.stats.index));
   }
 
@@ -23,9 +23,9 @@ class Cat extends Component {
     return (
       <div className="__Cat__ container" 
           draggable="true" 
-          style={{width:this.props.stats.width+'em' ,height:this.props.stats.height + 'em', background: this.props.stats.hp === 0 ? 'lightcoral' : 'white'}} 
+          style={{ width:this.props.stats.width+'em' ,height:this.props.stats.height + 'em', background: this.props.stats.hp === 0 ? 'lightcoral' : 'white' }} 
           onDragStart={this.drag.bind(this)}>
-        <div id="inner" className="row inner" style={{height: this.props.stats.thumb ? '80%' : '90%'}}>
+        <div id="inner" className="row inner" style={{ height: this.props.stats.thumb ? '80%' : '90%' }}>
           <div className="row">
             <div className="col-lg-11">
               <div>{this.props.stats.name}</div>

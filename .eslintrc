@@ -23,7 +23,7 @@
       "objectsInObjects": false,
       "arraysInObjects": false
     }],
-    "brace-style": [2, "stroustrup", { "allowSingleLine": true }],
+    "brace-style": [2, "1tbs", { "allowSingleLine": true }],
     "space-before-function-paren" : 2,
     "space-before-blocks": 2
   }
