@@ -39,7 +39,7 @@ class Battle extends Component {
       if(count % 5 === 0) {
         direction = Math.random() > .5 ? 'RIGHT' : 'LEFT';
       }
-      if(count % 2 === 0 && Math.random() > .5) {
+      if(Math.random() > .5) {
         this.swingWeapon(this.enemySword, 'enemy');
         this.props.dispatch(actions.attack('enemy',
           theirCats[this.props.catData.enemy.charInBattle].index,
