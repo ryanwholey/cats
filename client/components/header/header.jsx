@@ -7,7 +7,8 @@ export default () => {
     render: () => {
       return (
         <div id="__header__" className="jumbotron">
-          <h1 >Cat facts for humans about cats!!</h1>
+          <h1 >Cats</h1>
+          <h3> Cat facts for humans about cats!!</h3>
         </div>
       );
     }
