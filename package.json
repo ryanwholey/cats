@@ -6,7 +6,10 @@
   "scripts": {
     "test": "mocha --compilers js:babel-core/register",
     "lint": "eslint client",
-    "start": "webpack-dev-server --port 4000 --inline --devtool eval --progress --colors --hot --content-base build/"
+    "watch": "webpack --watch --progress --colors",
+    "start": "node server/server.js",
+    "deploy": "webpack --progress --colors --config webpack.production.config.js",
+    "dev": "webpack-dev-server --port 4000 --inline --devtool eval --progress --colors --hot --content-base build/"
   },
   "babel": {
     "presets": [

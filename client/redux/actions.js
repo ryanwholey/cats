@@ -1,3 +1,9 @@
+var host = process.env.host || 'localhost';
+var port = process.env.port || 8000;
+
+
+console.log(host, port);
+
 
 export const changeState = (input) => {
   return {
@@ -95,7 +101,7 @@ export const setCharInBattle = (user, index) => {
 
 export const getPictures = () => {
   return (dispatch) => {
-    return fetch('http://localhost:8000/pics')
+    return fetch(`http://${host}:8000/pics`)
       .then((response) => {
         if (!response.ok) {
           throw new Error('Signup failure: ', response);
@@ -133,7 +139,7 @@ export const getPictures = () => {
 
 export const getFacts = () => {
   return (dispatch) => {
-    return fetch('http://localhost:8000/facts')
+    return fetch(`http://${host}:8000/facts`)
       .then((response) => {
         if (!response.ok) {
           throw new Error('Signup failure: ', response);
